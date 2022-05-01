@@ -67,7 +67,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         Times testTime = new Times(intHourOfDay, intMinute, "Label", true);
 
-        String message = "Alarm Set for " + ((intHourOfDay/10==0)?"0"+intHourOfDay:intHourOfDay) + ":" + ((intMinute/10==0)?"0"+intMinute:intMinute.toString());
+        String message = "Alarm Set for " + ((intHourOfDay/10==0)?"0"+intHourOfDay:intHourOfDay) + ":" + ((intMinute/10==0)?"0"+intMinute:intMinute);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
         savedAlarms.add(testTime);
