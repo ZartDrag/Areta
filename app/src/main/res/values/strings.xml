@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Areta</string>
+    <string name="alarms">Alarms</string>
+    <string name="set_alarm">Set Alarm</string>
+    <string name="placeholder_text">Placeholder text</string>
+    <string name="label">=> Label</string>
+    <string name="snooze">Snooze</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="workout">Workout</string>
+</resources>
