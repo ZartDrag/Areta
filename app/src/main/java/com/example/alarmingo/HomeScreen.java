@@ -27,7 +27,7 @@ public class HomeScreen extends AppCompatActivity {
         WorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myintent = new Intent(HomeScreen.this, AlarmList.class);
+                Intent myintent = new Intent(HomeScreen.this, WorkoutList.class);
                 startActivity(myintent);
             }
         });
