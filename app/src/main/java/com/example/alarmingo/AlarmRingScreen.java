@@ -21,7 +21,7 @@ public class AlarmRingScreen extends AppCompatActivity {
 
         int snoozeDuration = 300000; //in milliseconds
 
-        Button SnoozeButton = (Button) findViewById(R.id.SnoozeButton);
+        Button SnoozeButton = findViewById(R.id.SnoozeButton);
 
         SnoozeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +29,7 @@ public class AlarmRingScreen extends AppCompatActivity {
                 AlarmList.stop_alarm_tone();
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                Intent intent = new Intent(AlarmRingScreen.this, AlertReceiver.class);
+                Intent intent = new Intent(AlarmRingScreen.this, Puzzle1.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmRingScreen.this, ALARM_REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, snoozeDuration, pendingIntent );
 
@@ -38,20 +38,19 @@ public class AlarmRingScreen extends AppCompatActivity {
 
                 Intent myintent = new Intent(AlarmRingScreen.this, AlarmList.class);
                 startActivity(myintent);
+//                finish();
             }
         });
 
 
-        Button DismissButton = (Button) findViewById(R.id.DismissButton);
+        Button DismissButton = findViewById(R.id.DismissButton);
         DismissButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlarmList.stop_alarm_tone();
-                String message = "Alarm Dismissed";
-                Toast.makeText(AlarmRingScreen.this, message, Toast.LENGTH_LONG).show();
-                Intent myintent = new Intent(AlarmRingScreen.this, AlarmList.class);
+                Intent myintent = new Intent(AlarmRingScreen.this, Puzzle1.class);
                 startActivity(myintent);
-
+                finish();
             }
         });
     }

@@ -8,4 +8,7 @@
     <string name="dismiss">Dismiss</string>
     <string name="workout">Workout</string>
     <string name="sno">Sno</string>
+    <string name="no">No</string>
+    <string name="equals">=</string>
+    <string name="enter">Enter</string>
 </resources>
