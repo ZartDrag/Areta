@@ -36,16 +36,16 @@ public class WorkoutAdapter extends ArrayAdapter<Workout>{
         Workout currentWk = getItem(position);
 
         // Find the TextView in the list_item.xml layout with the ID Sno
-        TextView snoTextView = (TextView) listItemView.findViewById(R.id.Sno);
+        TextView snoTextView = listItemView.findViewById(R.id.Sno);
         String text = Integer.toString(position + 1);
         snoTextView.setText(text);
 
         // Find the TextView in the list_item.xml layout with the ID workout_name
-        TextView nameTextView = (TextView) listItemView.findViewById(R.id.workout_name);
+        TextView nameTextView = listItemView.findViewById(R.id.workout_name);
         nameTextView.setText(currentWk.getName());
 
         // Find the TextView in the list_item.xml layout with the ID duration.
-        TextView durationTextView = (TextView) listItemView.findViewById(R.id.duration);
+        TextView durationTextView = listItemView.findViewById(R.id.duration);
 
         if(currentWk.getHasReps()) {
             text = "X" + currentWk.getReps();

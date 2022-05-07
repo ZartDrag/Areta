@@ -15,21 +15,15 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 
         Button AlarmButton = findViewById(R.id.GotoAlarm);
-        AlarmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myintent = new Intent(HomeScreen.this, AlarmList.class);
-                startActivity(myintent);
-            }
+        AlarmButton.setOnClickListener(v -> {
+            Intent myintent = new Intent(HomeScreen.this, AlarmList.class);
+            startActivity(myintent);
         });
 
         Button WorkoutButton = findViewById(R.id.GotoWorkout);
-        WorkoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myintent = new Intent(HomeScreen.this, WorkoutList.class);
-                startActivity(myintent);
-            }
+        WorkoutButton.setOnClickListener(v->{
+            Intent myintent = new Intent(HomeScreen.this, WorkoutList.class);
+            startActivity(myintent);
         });
     }
 }

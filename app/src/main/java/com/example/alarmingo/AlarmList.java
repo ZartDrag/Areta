@@ -33,12 +33,10 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         setContentView(R.layout.alarm_list);
 
         Button buttonTimePicker = findViewById(R.id.SetAlarmButton);
-        buttonTimePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "time picker");
-            }
+
+        buttonTimePicker.setOnClickListener( v -> {
+            DialogFragment timePicker = new TimePickerFragment();
+            timePicker.show(getSupportFragmentManager(), "time picker");
         });
     }
 
@@ -76,7 +74,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         // There should be a {@link ListView} with the view ID called list, which is declared in the
         // word_list.xml layout file.
 
-        ListView listView = (ListView) findViewById(R.id.alarm_list);
+        ListView listView = findViewById(R.id.alarm_list);
 
         // Make the {@link ListView} use the {@link WordAdapter} we created above, so that the
         // {@link ListView} will display list items for each {@link Word} in the list.

@@ -51,18 +51,15 @@ public class Puzzle1 extends AppCompatActivity {
         }
 
         Button EnterButton = findViewById(R.id.enter_button);
-        EnterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String result = InputText.getText().toString();
-                if(result.equals(Integer.toString(ans))){
-                    Toast.makeText(Puzzle1.this, "Correct!", Toast.LENGTH_SHORT).show();
-                    AlarmList.stop_alarm_tone();
-                    finish();
-                } else {
-                    Toast.makeText(Puzzle1.this, "Incorrect!!", Toast.LENGTH_LONG).show();
-                    AlarmList.start_alarm_tone();
-                }
+        EnterButton.setOnClickListener( v -> {
+            String result = InputText.getText().toString();
+            if(result.equals(Integer.toString(ans))){
+                Toast.makeText(Puzzle1.this, "Correct!", Toast.LENGTH_SHORT).show();
+                AlarmList.stop_alarm_tone();
+                finish();
+            } else {
+                Toast.makeText(Puzzle1.this, "Incorrect!!", Toast.LENGTH_LONG).show();
+                AlarmList.start_alarm_tone();
             }
         });
     }

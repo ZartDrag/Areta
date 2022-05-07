@@ -35,23 +35,20 @@ public class TimesAdapter extends ArrayAdapter<Times> implements TimePickerDialo
         Times currentTime = getItem(position);
 
         // Find the TextView in the list_item.xml layout with the ID alarm_time
-        TextView timeTextView = (TextView) listItemView.findViewById(R.id.alarm_time);
+        TextView timeTextView = listItemView.findViewById(R.id.alarm_time);
         timeTextView.setText(currentTime.getTime());
-        timeTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(new FragmentActivity().getSupportFragmentManager(), "Time picker");
-                //FIX THIS!
-            }
+        timeTextView.setOnClickListener(v -> {
+            DialogFragment timePicker = new TimePickerFragment();
+            timePicker.show(new FragmentActivity().getSupportFragmentManager(), "Time picker");
+            //FIX THIS!
         });
 
         // Find the TextView in the list_item.xml layout with the ID label_text_view.
-        TextView labelTextView = (TextView) listItemView.findViewById(R.id.label_text_view);
+        TextView labelTextView = listItemView.findViewById(R.id.label_text_view);
         // to set the label
         labelTextView.setText(currentTime.getLabel());
 
-        SwitchCompat alarmStatus = (SwitchCompat) listItemView.findViewById(R.id.alarm_switch);
+        SwitchCompat alarmStatus = listItemView.findViewById(R.id.alarm_switch);
 
         alarmStatus.setChecked(currentTime.getStatus());
         return listItemView;

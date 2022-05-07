@@ -22,7 +22,7 @@ public class WorkoutList extends AppCompatActivity {
 
         // adapter knows how to create list items for each item in the list.
         WorkoutAdapter adapter = new WorkoutAdapter(this, WList);
-        ListView listView = (ListView) findViewById(R.id.workout_list);
+        ListView listView = findViewById(R.id.workout_list);
 
         // Make the {@link ListView} use the {@link WordAdapter} we created above, so that the
         // {@link ListView} will display list items for each {@link Word} in the list.
