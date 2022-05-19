@@ -1,34 +1,25 @@
 package com.example.alarmingo;
 
 class Workout {
-    String Name;
-    int Reps;
-    int Duration;
-    boolean HasReps;
-
-    Workout(String name, int reps, boolean has_reps){
-        Name = name;
-        HasReps = has_reps;
-        if(HasReps){
-            Reps = reps;
-        } else {
-            Duration = reps;
-        }
+    public Workout(String _id, String name, String reps, String has_reps) {
+        this.name = name;
+        this.reps = reps;
+        this.has_reps = has_reps;
     }
+
+    String name, reps, has_reps;
+
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public boolean getHasReps() {
-        return HasReps;
+    public String getReps() {
+        return reps;
     }
 
-    public int getReps() {
-        if (HasReps)
-            return Reps;
-        else
-            return Duration;
+    public String getHas_reps() {
+        return has_reps;
     }
 }
 

@@ -16,10 +16,11 @@ import androidx.fragment.app.FragmentActivity;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WorkoutAdapter extends ArrayAdapter<Workout>{
 
-    public WorkoutAdapter(Context context, ArrayList<Workout> times) {
+    public WorkoutAdapter(Context context, List<Workout> times) {
         super(context, 0, times);
     }
 
@@ -47,7 +48,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout>{
         // Find the TextView in the list_item.xml layout with the ID duration.
         TextView durationTextView = listItemView.findViewById(R.id.duration);
 
-        if(currentWk.getHasReps()) {
+        if(currentWk.getHas_reps().equals("true")) {
             text = "X" + currentWk.getReps();
         } else {
             text = currentWk.getReps() + " seconds";

@@ -34,8 +34,9 @@ public class AlarmRingScreen extends AppCompatActivity {
             String message = "Alarm snoozed for " + snoozeDuration/60000 + " minutes"; //FIX THIS!!
             Toast.makeText(AlarmRingScreen.this, message, Toast.LENGTH_LONG).show();
 
-            Intent myintent = new Intent(AlarmRingScreen.this, AlarmList.class);
-            startActivity(myintent);
+            finish();
+//            Intent myintent = new Intent(AlarmRingScreen.this, AlarmList.class);
+//            startActivity(myintent);
         });
 
 
