@@ -9,7 +9,7 @@ public interface JSONreciever {
     Call<List<Workout>> getMonday();
 
     @GET("tuesday")
-    Call<List<Workout>> getMondayTuesday();
+    Call<List<Workout>> getTuesday();
 
     @GET("wednesday")
     Call<List<Workout>> getWednesday();

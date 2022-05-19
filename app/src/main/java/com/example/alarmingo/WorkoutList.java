@@ -1,13 +1,16 @@
 package com.example.alarmingo;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class WorkoutList extends AppCompatActivity {
 
     JSONreciever JRec;
     List<Workout> WList = new ArrayList<>();
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,22 +36,57 @@ public class WorkoutList extends AppCompatActivity {
                 .build();
 
         JRec = retrofit.create(JSONreciever.class);
-        getMonday();
-
+        getExercises();
     }
 
-    public void getMonday(){
-        Call<List<Workout>> call = JRec.getMonday();
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void getExercises(){
+
+        String day = LocalDate.now().getDayOfWeek().name();
+        Log.i("Day:", day);
+        Call<List<Workout>> call;
+
+        switch(day){
+            case "MONDAY":
+                call = JRec.getMonday();
+                break;
+
+            case "TUESDAY":
+                call = JRec.getTuesday();
+                break;
+
+            case "WEDNESDAY":
+                call = JRec.getWednesday();
+                break;
+
+            case "FRIDAY":
+                call = JRec.getFriday();
+                break;
+
+            case "Saturday":
+                call = JRec.getSaturday();
+                break;
+
+            case "Sunday":
+                call = JRec.getStretches();
+                break;
+
+            default:
+                return;
+        }
+
+
         call.enqueue(new Callback<List<Workout>>() {
             @Override
             public void onResponse(@NonNull Call<List<Workout>> call, @NonNull Response<List<Workout>> response) {
                 if (!response.isSuccessful()){
                     Toast.makeText(WorkoutList.this, response.code(), Toast.LENGTH_LONG).show();
-                    Log.i("Responded", Integer.toString(response.code()));
+//                    Log.i("Responded", Integer.toString(response.code()));
                     return;
                 }
                 WList = response.body();
-                Log.i("reached here", "onResponse: hello");
+//                Log.i("reached here", "onResponse: hello");
 
                 // adapter knows how to create list items for each item in the list.
                 WorkoutAdapter adapter = new WorkoutAdapter(WorkoutList.this, WList);
