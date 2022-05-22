@@ -64,11 +64,11 @@ public class WorkoutList extends AppCompatActivity {
                 call = JRec.getFriday();
                 break;
 
-            case "Saturday":
+            case "SATURDAY":
                 call = JRec.getSaturday();
                 break;
 
-            case "Sunday":
+            case "SUNDAY":
                 call = JRec.getStretches();
                 break;
 

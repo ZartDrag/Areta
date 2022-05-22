@@ -3,7 +3,7 @@
     package="com.example.alarmingo">
 
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Alarmingo">
+        <activity
+            android:name=".WorkoutHome"
+            android:exported="false" />
         <activity
             android:name=".Puzzle1"
             android:exported="false" />

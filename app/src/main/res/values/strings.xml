@@ -1,9 +1,9 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Areta</string>
     <string name="alarms">Alarms</string>
     <string name="set_alarm">Set Alarm</string>
     <string name="placeholder_text">Placeholder text</string>
-    <string name="label">=> Label</string>
+    <string name="label" tools:ignore="PrivateResource">=> Label</string>
     <string name="snooze">Snooze</string>
     <string name="dismiss">Dismiss</string>
     <string name="workout">Workout</string>
@@ -11,4 +11,13 @@
     <string name="no">No</string>
     <string name="equals">=</string>
     <string name="enter">Enter</string>
+    <string name="start">START</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="stretches">Stretches</string>
 </resources>
