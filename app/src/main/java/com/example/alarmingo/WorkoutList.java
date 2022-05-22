@@ -44,7 +44,6 @@ public class WorkoutList extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void getExercises(){
 
-//        String day = LocalDate.now().getDayOfWeek().name();
         Intent myIntent = getIntent(); // gets the previously created intent
         String day = myIntent.getStringExtra("day");
         Call<List<Workout>> call;

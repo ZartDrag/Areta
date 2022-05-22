@@ -1,13 +1,19 @@
 package com.example.alarmingo;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 
+import java.time.LocalDate;
+
 public class WorkoutHome extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +29,44 @@ public class WorkoutHome extends AppCompatActivity {
         Button Str = findViewById(R.id.StrButt);
 
         Intent myIntent = new Intent(this, WorkoutList.class);
+
+        String WeekDay = LocalDate.now().getDayOfWeek().name();
+
+        switch(WeekDay){
+            case "MONDAY":
+                Mon.setTextColor(Color.parseColor("#0CFF00"));
+                break;
+
+            case "TUESDAY":
+                Tue.setTextColor(Color.parseColor("#0CFF00"));
+                break;
+
+            case "WEDNESDAY":
+                Wed.setTextColor(Color.parseColor("#0CFF00"));
+                break;
+
+            case "THURSDAY":
+                Thu.setTextColor(Color.parseColor("#0CFF00"));
+                break;
+
+            case "FRIDAY":
+                Fri.setTextColor(Color.parseColor("#0CFF00"));
+                break;
+
+            case "SATURDAY":
+                Sat.setTextColor(Color.parseColor("#0CFF00"));
+                break;
+
+            case "SUNDAY":
+                Sun.setTextColor(Color.parseColor("#0CFF00"));
+                break;
+
+            case "STRETCHES" :
+                Str.setTextColor(Color.parseColor("#0CFF00"));
+                break;
+            default:
+                return;
+        }
 
         Mon.setOnClickListener(v -> {
             myIntent.putExtra("day","MONDAY");
