@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,8 +44,9 @@ public class WorkoutList extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void getExercises(){
 
-        String day = LocalDate.now().getDayOfWeek().name();
-        Log.i("Day:", day);
+//        String day = LocalDate.now().getDayOfWeek().name();
+        Intent myIntent = getIntent(); // gets the previously created intent
+        String day = myIntent.getStringExtra("day");
         Call<List<Workout>> call;
 
         switch(day){
@@ -69,40 +71,45 @@ public class WorkoutList extends AppCompatActivity {
                 break;
 
             case "SUNDAY":
-                call = JRec.getStretches();
+            case "THURSDAY":
+                call=null;
                 break;
 
+            case "STRETCHES" :
+                call = JRec.getStretches();
+                break;
             default:
                 return;
         }
 
-
-        call.enqueue(new Callback<List<Workout>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Workout>> call, @NonNull Response<List<Workout>> response) {
-                if (!response.isSuccessful()){
-                    Toast.makeText(WorkoutList.this, response.code(), Toast.LENGTH_LONG).show();
+        if(call!=null) {
+            call.enqueue(new Callback<List<Workout>>() {
+                @Override
+                public void onResponse(@NonNull Call<List<Workout>> call, @NonNull Response<List<Workout>> response) {
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(WorkoutList.this, response.code(), Toast.LENGTH_LONG).show();
 //                    Log.i("Responded", Integer.toString(response.code()));
-                    return;
-                }
-                WList = response.body();
+                        return;
+                    }
+                    WList = response.body();
 //                Log.i("reached here", "onResponse: hello");
 
-                // adapter knows how to create list items for each item in the list.
-                WorkoutAdapter adapter = new WorkoutAdapter(WorkoutList.this, WList);
-                ListView listView = findViewById(R.id.workout_list);
-                // Make the {@link ListView} use the {@link WordAdapter} we created above, so that the
-                // {@link ListView} will display list items for each {@link Word} in the list.
+                    // adapter knows how to create list items for each item in the list.
+                    WorkoutAdapter adapter = new WorkoutAdapter(WorkoutList.this, WList);
+                    ListView listView = findViewById(R.id.workout_list);
+                    // Make the {@link ListView} use the {@link WordAdapter} we created above, so that the
+                    // {@link ListView} will display list items for each {@link Word} in the list.
 
-                listView.setAdapter(adapter);
-            }
+                    listView.setAdapter(adapter);
+                }
 
-            @Override
-            public void onFailure(@NonNull Call<List<Workout>> call, @NonNull Throwable t) {
-                Toast.makeText(WorkoutList.this, t.getMessage() , Toast.LENGTH_LONG).show();
-                Log.i("No response", t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(@NonNull Call<List<Workout>> call, @NonNull Throwable t) {
+                    Toast.makeText(WorkoutList.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.i("No response", t.getMessage());
+                }
+            });
+        }
     }
 
 

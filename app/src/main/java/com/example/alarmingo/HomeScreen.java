@@ -22,7 +22,7 @@ public class HomeScreen extends AppCompatActivity {
 
         Button WorkoutButton = findViewById(R.id.GotoWorkout);
         WorkoutButton.setOnClickListener(v->{
-            Intent myintent = new Intent(HomeScreen.this, WorkoutList.class);
+            Intent myintent = new Intent(HomeScreen.this, WorkoutHome.class);
             startActivity(myintent);
         });
     }
