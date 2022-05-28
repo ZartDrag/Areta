@@ -1,27 +1,22 @@
 package com.example.alarmingo;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutAdapter extends ArrayAdapter<Workout>{
 
+    Context superActivity; //To call intent
+
     public WorkoutAdapter(Context context, List<Workout> times) {
         super(context, 0, times);
+        superActivity = context;
     }
 
     @Override
@@ -38,8 +33,8 @@ public class WorkoutAdapter extends ArrayAdapter<Workout>{
 
         // Find the TextView in the list_item.xml layout with the ID Sno
         TextView snoTextView = listItemView.findViewById(R.id.Sno);
-        String text = Integer.toString(position + 1);
-        snoTextView.setText(text);
+        String Sno = Integer.toString(position + 1);
+        snoTextView.setText(Sno);
 
         // Find the TextView in the list_item.xml layout with the ID workout_name
         TextView nameTextView = listItemView.findViewById(R.id.workout_name);
@@ -48,12 +43,26 @@ public class WorkoutAdapter extends ArrayAdapter<Workout>{
         // Find the TextView in the list_item.xml layout with the ID duration.
         TextView durationTextView = listItemView.findViewById(R.id.duration);
 
+        String Dur;
+
         if(currentWk.getHas_reps().equals("true")) {
-            text = "X" + currentWk.getReps();
+            Dur = "X" + currentWk.getReps();
         } else {
-            text = currentWk.getReps() + " seconds";
+            Dur = currentWk.getReps() + " seconds";
         }
-        durationTextView.setText(text);
+        durationTextView.setText(Dur);
+
+        listItemView.setOnClickListener(view -> {
+            Intent myIntent;
+            if(currentWk.getHas_reps().equals("true")) {
+                myIntent = new Intent(superActivity, WorkoutDeetsReps.class);
+            } else {
+                myIntent = new Intent(superActivity, WorkoutDeetsTime.class);
+            }
+            myIntent.putExtra("name", currentWk.getName());
+            myIntent.putExtra("reps",currentWk.getReps());
+            superActivity.startActivity(myIntent);
+        });
 
         return listItemView;
     }

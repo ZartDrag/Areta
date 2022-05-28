@@ -13,8 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Alarmingo">
         <activity
+            android:name=".WorkoutDeetsReps"
+            android:exported="false" />
+        <activity
+            android:name=".WorkoutDeetsTime"
+            android:exported="false" />
+        <activity
             android:name=".HomeScreen"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".SplashScreen"
             android:exported="true">
@@ -35,16 +41,12 @@
             android:exported="false" />
         <activity
             android:name=".AlarmRingScreen"
-            android:exported="false" />
-
-<!--        -->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
+            android:exported="false" /> <!--  -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity
             android:name=".AlarmList"
             android:exported="true" />
