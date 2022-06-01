@@ -52,17 +52,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout>{
         }
         durationTextView.setText(Dur);
 
-        listItemView.setOnClickListener(view -> {
-            Intent myIntent;
-            if(currentWk.getHas_reps().equals("true")) {
-                myIntent = new Intent(superActivity, WorkoutDeetsReps.class);
-            } else {
-                myIntent = new Intent(superActivity, WorkoutDeetsTime.class);
-            }
-            myIntent.putExtra("name", currentWk.getName());
-            myIntent.putExtra("reps",currentWk.getReps());
-            superActivity.startActivity(myIntent);
-        });
+        listItemView.setOnClickListener(view -> WorkoutList.callNextExercise(currentWk, position, superActivity));
 
         return listItemView;
     }

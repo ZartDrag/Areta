@@ -7,6 +7,12 @@ class Workout {
         this.has_reps = has_reps;
     }
 
+    public Workout(String name, String reps, String has_reps) {
+        this.name = name;
+        this.reps = reps;
+        this.has_reps = has_reps;
+    }
+
     String name, reps, has_reps;
 
 
