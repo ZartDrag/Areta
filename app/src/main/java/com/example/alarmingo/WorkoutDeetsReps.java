@@ -34,13 +34,8 @@ public class WorkoutDeetsReps extends AppCompatActivity {
         int Pos = myIntent.getIntExtra("pos", 0);
 
         DoneButton.setOnClickListener(view -> {
-            WorkoutList.callNextExercise(WorkoutList.WList.get(Pos+1),Pos+1,this);  //Figure out how to pass the next workout!!!!
+            WorkoutList.callNextExercise(WorkoutList.WList.get(Pos+1),Pos+1,this);
             finish();
         });
-
-
-//        Log.i("2", myIntent.getStringExtra("name"));
-//        Log.i("4", myIntent.getStringExtra("reps"));
-
     }
 }

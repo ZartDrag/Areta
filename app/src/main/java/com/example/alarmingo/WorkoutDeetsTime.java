@@ -18,15 +18,24 @@ public class WorkoutDeetsTime extends AppCompatActivity {
 
         TextView NameTextView = findViewById(R.id.name_time);
         TextView RepsTextView = findViewById(R.id.time);
-        Button DoneButton = findViewById(R.id.time_done_button);
+        Button PauseButton = findViewById(R.id.time_pause_button);
+        Button SkipButton = findViewById(R.id.time_skip_button);
 
-        NameTextView.setText(myIntent.getStringExtra("name"));
+        String Name = myIntent.getStringExtra("name");
+        NameTextView.setText(Name);
 
-        String Time = myIntent.getStringExtra("reps") + "seconds";
+        String Time = myIntent.getStringExtra("reps") + " seconds";
 
         RepsTextView.setText(Time);
 
-        DoneButton.setOnClickListener(view -> {
+        int Pos = myIntent.getIntExtra("pos", 0);
+
+        SkipButton.setOnClickListener(view -> {
+            WorkoutList.callNextExercise(WorkoutList.WList.get(Pos+1),Pos+1,this);
+            finish();
+        });
+
+        PauseButton.setOnClickListener(view -> {
 
         });
     }

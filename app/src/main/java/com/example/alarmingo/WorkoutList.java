@@ -47,17 +47,25 @@ public class WorkoutList extends AppCompatActivity {
         WorkoutStartButton.setOnClickListener(view -> callNextExercise(WList.get(0), 0, this));
     }
 
-    public static void callNextExercise(Workout ListItem, int Pos, Context con) {
+    public static void callNextExercise(@NonNull Workout ListItem, int Pos, Context con) {
         Intent NextExeIntent;
-        if (ListItem.getHas_reps().equals("true")) {
-            NextExeIntent = new Intent(con, WorkoutDeetsReps.class);
+        if (WList.size() == Pos+1) {
+            NextExeIntent = new Intent(con, WorkoutCompleteScreen.class);
         } else {
-            NextExeIntent = new Intent(con, WorkoutDeetsTime.class);
+            if (ListItem.getHas_reps().equals("true")) {
+                NextExeIntent = new Intent(con, WorkoutDeetsReps.class);
+            } else {
+                NextExeIntent = new Intent(con, WorkoutDeetsTime.class);
+            }
+            NextExeIntent.putExtra("name", ListItem.getName());
+            NextExeIntent.putExtra("reps", ListItem.getReps());
+            NextExeIntent.putExtra("pos", Pos);
         }
-        NextExeIntent.putExtra("name", ListItem.getName());
-        NextExeIntent.putExtra("reps", ListItem.getReps());
-        NextExeIntent.putExtra("pos", Pos);
+
+
         con.startActivity(NextExeIntent);
+
+
     }
 
 
