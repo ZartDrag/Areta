@@ -111,6 +111,7 @@ public class WorkoutList extends AppCompatActivity {
         } else {
             Intent RestIntent = new Intent(this,WorkoutRest.class);
             startActivity(RestIntent);
+            finish();
         }
     }
 

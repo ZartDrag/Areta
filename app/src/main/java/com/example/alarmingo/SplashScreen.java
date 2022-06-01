@@ -27,14 +27,16 @@ public class SplashScreen extends AppCompatActivity {
         AretaName = findViewById(R.id.areta_name);
         AretaCaption = findViewById(R.id.areta_caption);
 
-        up = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.up);
+        up = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.up);
         logoImage.setAnimation(up);
 
-        down = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.down);
+        down = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.down);
         AretaCaption.setAnimation(down);
 
         new Handler().postDelayed(() -> {
-                startActivity(new Intent(getApplicationContext(),HomeScreen.class));
-        },4500);
+            startActivity(new Intent(getApplicationContext(), HomeScreen.class));
+            finish();
+        }, 4500);
+
     }
 }
