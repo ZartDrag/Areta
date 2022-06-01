@@ -24,4 +24,6 @@
     <string name="areta_logo">Areta logo</string>
     <string name="workout_name">Workout Name</string>
     <string name="done">Done</string>
+    <string name="you_have_worked_hard">You have worked hard, take a rest today</string>
+    <string name="rest_day">Rest Day</string>
 </resources>

@@ -108,6 +108,9 @@ public class WorkoutList extends AppCompatActivity {
                     Log.i("No response", t.getMessage());
                 }
             });
+        } else {
+            Intent RestIntent = new Intent(this,WorkoutRest.class);
+            startActivity(RestIntent);
         }
     }
 

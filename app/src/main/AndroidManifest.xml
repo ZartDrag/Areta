@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Alarmingo">
         <activity
+            android:name=".WorkoutRest"
+            android:exported="false" />
+        <activity
             android:name=".WorkoutDeetsReps"
             android:exported="false" />
         <activity
