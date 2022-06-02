@@ -3,7 +3,9 @@ package com.example.alarmingo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,8 @@ public class Puzzle1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle1);
+
+        new Handler().postDelayed(AlarmList::start_alarm_tone, 60000); //Alarm would start ringing again if the user doesn't respond within one minute
 
         EditText InputText = findViewById(R.id.input_text);
         InputText.setInputType(InputType.TYPE_CLASS_NUMBER);

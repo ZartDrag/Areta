@@ -14,6 +14,6 @@ public class WorkoutRest extends AppCompatActivity {
 
         Button DoneButton = findViewById(R.id.rest_done_button);
 
-        DoneButton.setOnClickListener(view ->finish());
+        DoneButton.setOnClickListener(view -> finish());
     }
 }

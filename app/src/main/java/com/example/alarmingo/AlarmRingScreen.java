@@ -2,6 +2,7 @@ package com.example.alarmingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -28,7 +29,7 @@ public class AlarmRingScreen extends AppCompatActivity {
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(AlarmRingScreen.this, Puzzle1.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmRingScreen.this, ALARM_REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmRingScreen.this, ALARM_REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, snoozeDuration, pendingIntent );
 
             String message = "Alarm snoozed for " + snoozeDuration/60000 + " minutes"; //FIX THIS!!
@@ -43,7 +44,25 @@ public class AlarmRingScreen extends AppCompatActivity {
         Button DismissButton = findViewById(R.id.DismissButton);
         DismissButton.setOnClickListener(v -> {
             AlarmList.stop_alarm_tone();
-            Intent myintent = new Intent(AlarmRingScreen.this, Puzzle1.class);
+
+            int max = 2, min = 1;
+            int val = (int) (Math.random() * (max - min + 1) + min);
+
+            Intent myintent;
+
+            switch(val){
+                case 1:
+                    myintent = new Intent(AlarmRingScreen.this, Puzzle1.class);
+                    break;
+
+                case 2:
+                    myintent = new Intent(AlarmRingScreen.this, Puzzle2.class);
+                    break;
+
+                default:
+                    myintent=null;
+            }
+
             startActivity(myintent);
             finish();
         });
