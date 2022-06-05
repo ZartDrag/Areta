@@ -4,11 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class WorkoutDeetsTime extends AppCompatActivity {
 
+    CountDownTimer timer;
+    boolean timerRunning;
+    long timeLeft;
+    TextView NameTextView, RepsTextView;
+    Button PauseButton, SkipButton;
+    int Pos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,10 +25,10 @@ public class WorkoutDeetsTime extends AppCompatActivity {
 
         Intent myIntent = getIntent(); // gets the previously created intent
 
-        TextView NameTextView = findViewById(R.id.name_time);
-        TextView RepsTextView = findViewById(R.id.time);
-        Button PauseButton = findViewById(R.id.time_pause_button);
-        Button SkipButton = findViewById(R.id.time_skip_button);
+        NameTextView = findViewById(R.id.name_time);
+        RepsTextView = findViewById(R.id.time);
+        PauseButton = findViewById(R.id.time_pause_button);
+        SkipButton = findViewById(R.id.time_skip_button);
 
         String Name = myIntent.getStringExtra("name");
         NameTextView.setText(Name);
@@ -27,8 +36,7 @@ public class WorkoutDeetsTime extends AppCompatActivity {
         String Time = myIntent.getStringExtra("reps") + " seconds";
 
         RepsTextView.setText(Time);
-
-        int Pos = myIntent.getIntExtra("pos", 0);
+        Pos = myIntent.getIntExtra("pos", 0);
 
         SkipButton.setOnClickListener(view -> {
             WorkoutList.callNextExercise(WorkoutList.WList.get(Pos+1),Pos+1,this);
@@ -36,7 +44,48 @@ public class WorkoutDeetsTime extends AppCompatActivity {
         });
 
         PauseButton.setOnClickListener(view -> {
-
+            stopTimer();
+            PauseButton.setText(R.string.resume);
         });
+
+        new Handler().postDelayed(this::StartTimer, 1000);
+    }
+
+    void StartTimer(){
+        final CharSequence val = RepsTextView.getText();
+        String num = val.toString().substring(0,2);
+        timeLeft = Long.parseLong(num)* 1000;
+
+        timer = new CountDownTimer(timeLeft, 1000) {
+            @Override
+            public void onTick(long l) {
+                timeLeft = l;
+                updateTimer();
+            }
+
+            @Override
+            public void onFinish() {
+                WorkoutList.callNextExercise(WorkoutList.WList.get(Pos+1),Pos+1,WorkoutDeetsTime.this);
+                finish();
+            }
+        }.start();
+        timerRunning=true;
+    }
+
+    void updateTimer(){
+        int time = (int) timeLeft/1000;
+        String T = time + " seconds";
+
+        RepsTextView.setText(T);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    void stopTimer(){
+        timer.cancel();
+        timerRunning=false;
     }
 }

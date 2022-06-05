@@ -28,6 +28,7 @@
     <string name="rest_day">Rest Day</string>
     <string name="skip">Skip</string>
     <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
     <string name="congratulations">Congratulations!</string>
     <string name="workout_completed">Workout Completed</string>
     <string name="click_here">Click here!</string>
