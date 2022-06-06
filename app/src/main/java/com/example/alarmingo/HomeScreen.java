@@ -30,6 +30,7 @@ public class HomeScreen extends AppCompatActivity {
         PomodoroButton.setOnClickListener(v -> {
             Intent myintent = new Intent(HomeScreen.this, PomodoroActivity.class);
             myintent.putExtra("time", 1500);
+            myintent.putExtra("break", false);
             startActivity(myintent);
         });
     }
