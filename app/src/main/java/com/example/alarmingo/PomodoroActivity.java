@@ -2,9 +2,11 @@ package com.example.alarmingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,10 +19,14 @@ public class PomodoroActivity extends AppCompatActivity {
     Button PomoButton, PomoPauseButton, PomoStopButton;
     androidx.appcompat.widget.AppCompatButton TimerButt;
 
+    Vibrator vibrator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pomodoro);
+
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         Intent thisIntent = getIntent();
         timeLeft = thisIntent.getIntExtra("time", 0) * 1000L;
@@ -77,6 +83,7 @@ public class PomodoroActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                vibrator.vibrate(900);
                 Intent nextIntent = new Intent(PomodoroActivity.this, PomodoroActivity.class);
                 nextIntent.putExtra("time", 300);
                 nextIntent.putExtra("break", true);
