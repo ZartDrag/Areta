@@ -25,5 +25,12 @@ public class HomeScreen extends AppCompatActivity {
             Intent myintent = new Intent(HomeScreen.this, WorkoutHome.class);
             startActivity(myintent);
         });
+
+        Button PomodoroButton = findViewById(R.id.GotoPomo);
+        PomodoroButton.setOnClickListener(v -> {
+            Intent myintent = new Intent(HomeScreen.this, PomodoroActivity.class);
+            myintent.putExtra("time", 1500);
+            startActivity(myintent);
+        });
     }
 }

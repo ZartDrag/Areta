@@ -44,8 +44,13 @@ public class WorkoutDeetsTime extends AppCompatActivity {
         });
 
         PauseButton.setOnClickListener(view -> {
-            stopTimer();
-            PauseButton.setText(R.string.resume);
+            if(timerRunning) {
+                stopTimer();
+                PauseButton.setText(R.string.resume);
+            } else {
+                StartTimer();
+                PauseButton.setText(R.string.pause);
+            }
         });
 
         new Handler().postDelayed(this::StartTimer, 1000);

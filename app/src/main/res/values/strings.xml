@@ -32,4 +32,6 @@
     <string name="congratulations">Congratulations!</string>
     <string name="workout_completed">Workout Completed</string>
     <string name="click_here">Click here!</string>
+    <string name="pomodoro_timer">Pomodoro Timer</string>
+    <string name="pomodoro_focus_timer">Pomodoro Focus Timer</string>
 </resources>
