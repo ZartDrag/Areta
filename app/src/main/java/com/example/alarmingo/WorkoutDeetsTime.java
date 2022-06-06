@@ -2,10 +2,12 @@ package com.example.alarmingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,10 +20,13 @@ public class WorkoutDeetsTime extends AppCompatActivity {
     TextView NameTextView, RepsTextView;
     Button PauseButton, SkipButton;
     int Pos;
+    Vibrator vibrator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_deets_time);
+
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         Intent myIntent = getIntent(); // gets the previously created intent
 
@@ -70,6 +75,7 @@ public class WorkoutDeetsTime extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                vibrator.vibrate(900);
                 WorkoutList.callNextExercise(WorkoutList.WList.get(Pos+1),Pos+1,WorkoutDeetsTime.this);
                 finish();
             }
