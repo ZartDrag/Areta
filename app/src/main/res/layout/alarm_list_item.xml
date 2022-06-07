@@ -6,18 +6,6 @@
     android:orientation="horizontal"
     android:background="@drawable/rounded_tile"
     >
-
-    <!--    <ImageView-->
-<!--        android:id="@+id/edit_alarm"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:layout_marginBottom="36dp"-->
-<!--        android:contentDescription="@string/edit_alarm"-->
-<!--        android:src="@drawable/ic_baseline_edit_24"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
     <TextView
         android:id="@+id/alarm_time"
         android:layout_width="wrap_content"

@@ -36,8 +36,6 @@ public class AlarmRingScreen extends AppCompatActivity {
             Toast.makeText(AlarmRingScreen.this, message, Toast.LENGTH_LONG).show();
 
             finish();
-//            Intent myintent = new Intent(AlarmRingScreen.this, AlarmList.class);
-//            startActivity(myintent);
         });
 
 
