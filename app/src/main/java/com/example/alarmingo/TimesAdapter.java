@@ -17,9 +17,11 @@ import androidx.fragment.app.FragmentActivity;
 import java.util.ArrayList;
 
 public class TimesAdapter extends ArrayAdapter<Times> implements TimePickerDialog.OnTimeSetListener {
+    FragmentActivity con;
 
     public TimesAdapter(Context context, ArrayList<Times> times) {
         super(context, 0, times);
+        con = (FragmentActivity) context;
     }
 
     @Override
@@ -37,16 +39,7 @@ public class TimesAdapter extends ArrayAdapter<Times> implements TimePickerDialo
         // Find the TextView in the list_item.xml layout with the ID alarm_time
         TextView timeTextView = listItemView.findViewById(R.id.alarm_time);
         timeTextView.setText(currentTime.getTime());
-        timeTextView.setOnClickListener(v -> {
-            DialogFragment timePicker = new TimePickerFragment();
-            timePicker.show(new FragmentActivity().getSupportFragmentManager(), "Time picker");
-            //FIX THIS!
-        });
-
-        // Find the TextView in the list_item.xml layout with the ID label_text_view.
-        TextView labelTextView = listItemView.findViewById(R.id.label_text_view);
-        // to set the label
-        labelTextView.setText(currentTime.getLabel());
+        timeTextView.setOnClickListener(v -> AlarmList.TimeDialog(con));
 
         SwitchCompat alarmStatus = listItemView.findViewById(R.id.alarm_switch);
 
@@ -57,6 +50,5 @@ public class TimesAdapter extends ArrayAdapter<Times> implements TimePickerDialo
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
 
-        Log.i("Hello", "onTimeSet:");
     }
 }

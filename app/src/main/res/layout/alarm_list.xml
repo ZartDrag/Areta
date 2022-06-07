@@ -1,40 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AlarmList"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:text="@string/alarm"
+        android:layout_margin="6dp"
+        android:textColor="@color/black"/>
 
     <AnalogClock
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:layout_marginLeft="90dp"
         android:layout_marginRight="90dp"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center" />
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        />
+
     <DigitalClock
         android:layout_width="match_parent"
         android:layout_height="39dp"
         android:textAlignment="center"
         android:layout_gravity="center"
         android:textSize="30sp"
+        android:textColor="@color/black"
         android:layout_marginBottom="15dp"/>
 
     <ListView
+        android:layout_margin="6dp"
         android:id="@+id/alarm_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="15sp"/>
 
-    <Button
-        android:id="@+id/SetAlarmButton"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_margin="30dp"
-        android:text="@string/set_alarm"
-        android:textSize="27sp"/>
+        android:layout_height="90dp"
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/SetAlarmButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/rounded_tile"
+            android:text="@string/plus"
+            android:textSize="27sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

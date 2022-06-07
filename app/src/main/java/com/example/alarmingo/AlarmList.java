@@ -2,8 +2,10 @@ package com.example.alarmingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
@@ -32,6 +34,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
     private ArrayList<Times> savedAlarms = new ArrayList<>();
     static final int ALARM_REQ_CODE = 100;
     static MediaPlayer mp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -40,27 +43,30 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         Button buttonTimePicker = findViewById(R.id.SetAlarmButton);
 
-        buttonTimePicker.setOnClickListener( v -> {
-            DialogFragment timePicker = new TimePickerFragment();
-            timePicker.show(getSupportFragmentManager(), "time picker");
-        });
+        buttonTimePicker.setOnClickListener(v -> TimeDialog(this));
+    }
+
+    public static void TimeDialog(FragmentActivity con) {
+        DialogFragment timePicker = new TimePickerFragment();
+        timePicker.show(con.getSupportFragmentManager(), "time picker");
     }
 
     void saveData() {
-        SharedPreferences sp = getSharedPreferences("AlarmPrefs",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor =sp.edit();
+        SharedPreferences sp = getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
         String savedAlarmsJSONString = new Gson().toJson(savedAlarms);
         editor.putString(KEY_ALARMS, savedAlarmsJSONString);
         editor.apply();
     }
 
-    void loadData(){
+    void loadData() {
 
         SharedPreferences sharedPreferences = getSharedPreferences("AlarmPrefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(KEY_ALARMS, null);
 
-        Type type = new TypeToken<ArrayList<Times>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Times>>() {
+        }.getType();
 
         savedAlarms = gson.fromJson(json, type);
 
@@ -94,7 +100,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         c.set(Calendar.MINUTE, intMinute);
         c.set(Calendar.SECOND, 0);
 
-        updateAlarmList(intHourOfDay,intMinute);
+        updateAlarmList(intHourOfDay, intMinute);
         startAlarm(c);
 
 //        TextView textViewPicked=(TextView) findViewById(R.id.txtViewAlarm);
@@ -102,13 +108,13 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         //--------</ onTimeSet() >--------
     }
 
-    private void updateAlarmList(int intHourOfDay, int intMinute){
+    private void updateAlarmList(int intHourOfDay, int intMinute) {
         // adapter knows how to create list items for each item in the list.
         TimesAdapter adapter = new TimesAdapter(this, savedAlarms);
 
         Times testTime = new Times(intHourOfDay, intMinute, "Label", true);
 
-        String message = "Alarm Set for " + ((intHourOfDay/10==0)?"0"+intHourOfDay:intHourOfDay) + ":" + ((intMinute/10==0)?"0"+intMinute:intMinute);
+        String message = "Alarm Set for " + ((intHourOfDay / 10 == 0) ? "0" + intHourOfDay : intHourOfDay) + ":" + ((intMinute / 10 == 0) ? "0" + intMinute : intMinute);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
         savedAlarms.add(testTime);
@@ -125,7 +131,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         listView.setAdapter(adapter);
     }
 
-    private void updateAlarmList(){
+    private void updateAlarmList() {
         TimesAdapter adapter = new TimesAdapter(this, savedAlarms);
         ListView listView = findViewById(R.id.alarm_list);
         listView.setAdapter(adapter);
@@ -136,17 +142,17 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
 
         Intent intent = new Intent(this, AlertReceiver.class);
         @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ALARM_REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent );
+        alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
         mp = MediaPlayer.create(this, Settings.System.DEFAULT_ALARM_ALERT_URI);
 
     }
 
-    public static void start_alarm_tone(){
+    public static void start_alarm_tone() {
         mp.setLooping(true);
         mp.start();
     }
 
-    public static void stop_alarm_tone(){
+    public static void stop_alarm_tone() {
         mp.pause();
     }
 
