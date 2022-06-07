@@ -55,11 +55,20 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
     }
 
     void loadData(){
-        String savedAlarmsJSONString = getPreferences(MODE_PRIVATE).getString(KEY_ALARMS, null);
-        Type type = new TypeToken< ArrayList < Times >>() {}.getType();
-        if(type!=null) {
-            savedAlarms = new Gson().fromJson(savedAlarmsJSONString, type);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("AlarmPrefs", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(KEY_ALARMS, null);
+
+        Type type = new TypeToken<ArrayList<Times>>() {}.getType();
+
+        savedAlarms = gson.fromJson(json, type);
+
+        if (savedAlarms == null) {
+            savedAlarms = new ArrayList<>();
         }
+        updateAlarmList();
+
     }
 
     @Override
@@ -71,7 +80,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
     @Override
     protected void onResume() {
         super.onResume();
-//        loadData();
+        loadData();
     }
 
     @SuppressLint("SetTextI18n")
@@ -113,6 +122,12 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         // Make the {@link ListView} use the {@link WordAdapter} we created above, so that the
         // {@link ListView} will display list items for each {@link Word} in the list.
 
+        listView.setAdapter(adapter);
+    }
+
+    private void updateAlarmList(){
+        TimesAdapter adapter = new TimesAdapter(this, savedAlarms);
+        ListView listView = findViewById(R.id.alarm_list);
         listView.setAdapter(adapter);
     }
 
