@@ -2,11 +2,14 @@ package com.example.alarmingo;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -16,7 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import java.util.ArrayList;
 
-public class TimesAdapter extends ArrayAdapter<Times> implements TimePickerDialog.OnTimeSetListener {
+public class TimesAdapter extends ArrayAdapter<Times> {
     FragmentActivity con;
 
     public TimesAdapter(Context context, ArrayList<Times> times) {
@@ -41,14 +44,18 @@ public class TimesAdapter extends ArrayAdapter<Times> implements TimePickerDialo
         timeTextView.setText(currentTime.getTime());
         timeTextView.setOnClickListener(v -> AlarmList.TimeDialog(con));
 
+        ImageView DeleteAlarm = listItemView.findViewById(R.id.delete_alarm);
+        DeleteAlarm.setOnClickListener(view -> {
+            AlarmList.savedAlarms.remove(position);
+            ListView L = con.findViewById(R.id.alarm_list);
+            TimesAdapter adapter = new TimesAdapter(con, AlarmList.savedAlarms);
+            L.setAdapter(adapter);
+        });
+
         SwitchCompat alarmStatus = listItemView.findViewById(R.id.alarm_switch);
 
         alarmStatus.setChecked(currentTime.getStatus());
         return listItemView;
     }
 
-    @Override
-    public void onTimeSet(TimePicker timePicker, int i, int i1) {
-
-    }
 }

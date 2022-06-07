@@ -31,9 +31,10 @@ import java.util.Calendar;
 public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
     private static final String KEY_ALARMS = "KEY_ALARMS";
-    private ArrayList<Times> savedAlarms = new ArrayList<>();
+    public static ArrayList<Times> savedAlarms = new ArrayList<>();
     static final int ALARM_REQ_CODE = 100;
     static MediaPlayer mp;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         setContentView(R.layout.alarm_list);
 
         Button buttonTimePicker = findViewById(R.id.SetAlarmButton);
-
+        listView = findViewById(R.id.alarm_list);
         buttonTimePicker.setOnClickListener(v -> TimeDialog(this));
     }
 
@@ -131,9 +132,8 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         listView.setAdapter(adapter);
     }
 
-    private void updateAlarmList() {
+    public void updateAlarmList() {
         TimesAdapter adapter = new TimesAdapter(this, savedAlarms);
-        ListView listView = findViewById(R.id.alarm_list);
         listView.setAdapter(adapter);
     }
 
