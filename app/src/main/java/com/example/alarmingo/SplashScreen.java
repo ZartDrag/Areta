@@ -1,6 +1,7 @@
 package com.example.alarmingo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 public class SplashScreen extends AppCompatActivity {
 
     Animation up, down;
-    ImageView logoImage;
+    CardView logoImage;
     TextView AretaName, AretaCaption;
 
     @Override

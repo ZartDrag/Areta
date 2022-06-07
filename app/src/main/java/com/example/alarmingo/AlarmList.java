@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -18,11 +19,16 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
+    private static final String KEY_ALARMS = "KEY_ALARMS";
     private ArrayList<Times> savedAlarms = new ArrayList<>();
     static final int ALARM_REQ_CODE = 100;
     static MediaPlayer mp;
@@ -38,6 +44,34 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
             DialogFragment timePicker = new TimePickerFragment();
             timePicker.show(getSupportFragmentManager(), "time picker");
         });
+    }
+
+    void saveData() {
+        SharedPreferences sp = getSharedPreferences("AlarmPrefs",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor =sp.edit();
+        String savedAlarmsJSONString = new Gson().toJson(savedAlarms);
+        editor.putString(KEY_ALARMS, savedAlarmsJSONString);
+        editor.apply();
+    }
+
+    void loadData(){
+        String savedAlarmsJSONString = getPreferences(MODE_PRIVATE).getString(KEY_ALARMS, null);
+        Type type = new TypeToken< ArrayList < Times >>() {}.getType();
+        if(type!=null) {
+            savedAlarms = new Gson().fromJson(savedAlarmsJSONString, type);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        loadData();
     }
 
     @SuppressLint("SetTextI18n")
@@ -86,7 +120,7 @@ public class AlarmList extends AppCompatActivity implements TimePickerDialog.OnT
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ALARM_REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getBroadcast(this, ALARM_REQ_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent );
         mp = MediaPlayer.create(this, Settings.System.DEFAULT_ALARM_ALERT_URI);
 

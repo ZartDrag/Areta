@@ -57,8 +57,8 @@ public class WorkoutDeetsTime extends AppCompatActivity {
                 PauseButton.setText(R.string.pause);
             }
         });
-
-        new Handler().postDelayed(this::StartTimer, 1000);
+        vibrator.vibrate(900);
+        new Handler().postDelayed(this::StartTimer, 900);
     }
 
     void StartTimer(){
