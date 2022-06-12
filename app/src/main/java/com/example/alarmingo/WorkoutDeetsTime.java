@@ -44,6 +44,7 @@ public class WorkoutDeetsTime extends AppCompatActivity {
         Pos = myIntent.getIntExtra("pos", 0);
 
         SkipButton.setOnClickListener(view -> {
+            stopTimer();
             WorkoutList.callNextExercise(WorkoutList.WList.get(Pos+1),Pos+1,this);
             finish();
         });
